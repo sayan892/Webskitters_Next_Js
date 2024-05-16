@@ -1,16 +1,21 @@
+'use client'
 import { setCookie } from 'cookies-next';
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
-interface SignInFormProps {
-  onSignIn: () => void;
-}
-const SignInPage: React.FC<SignInFormProps> = ({onSignIn}) => {
-  const [formData, setFormData] = useState({ id: '', password: '' });
+import { useRouter } from 'next/navigation';
 
+
+const SignInPage: React.FC = () => {
+  const router = useRouter();
+
+  const handleSignIn = () => {
+    router.push("/product");
+  };
+  const [formData, setFormData] = useState({ id: '', password: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,8 +23,7 @@ const SignInPage: React.FC<SignInFormProps> = ({onSignIn}) => {
     // Check credentials
     if (formData.id === 'webskitters' && formData.password === 'webskitters') {
       setCookie('loggedIn', 'true');
-      onSignIn()
-  
+      handleSignIn();
     } else {
       alert('Invalid credentials');
     }
