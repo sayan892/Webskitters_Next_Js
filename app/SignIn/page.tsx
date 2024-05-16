@@ -1,3 +1,4 @@
+import { setCookie } from 'cookies-next';
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
 interface SignInFormProps {
@@ -16,7 +17,9 @@ const SignInPage: React.FC<SignInFormProps> = ({onSignIn}) => {
     e.preventDefault();
     // Check credentials
     if (formData.id === 'webskitters' && formData.password === 'webskitters') {
+      setCookie('loggedIn', 'true');
       onSignIn()
+  
     } else {
       alert('Invalid credentials');
     }
