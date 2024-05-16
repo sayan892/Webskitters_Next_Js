@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import authenticate from './Middleware/auth';
+import authenticate from '../../Middleware/auth';
 import {
   Table,
   Typography,
@@ -27,7 +27,7 @@ interface Product {
   image: string;
 }
 
-export default function Home() {
+export default function ProductTable() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
